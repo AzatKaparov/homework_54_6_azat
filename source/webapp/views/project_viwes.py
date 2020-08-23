@@ -4,8 +4,8 @@ from django.db.models import Q
 from django.urls import reverse
 from django.utils.http import urlencode
 from webapp.models import Project
-from django.views.generic import TemplateView, FormView, ListView, DetailView
-from webapp.forms import SimpleSearchForm
+from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView
+from webapp.forms import SimpleSearchForm, ProjectForm
 
 
 class ProjectIndexView(ListView):
@@ -47,3 +47,10 @@ class ProjectView(DetailView):
     model = Project
 
 
+class ProjectCreateView(CreateView):
+    model = Project
+    form_class = ProjectForm
+    template_name = 'project/project_create.html'
+
+    def get_success_url(self):
+        return reverse('project_view', kwargs={'pk': self.object.pk})

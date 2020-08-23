@@ -1,7 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Task, Status, Type
-
+from .models import Task, Status, Type, Project
 
 BROWSER_DATETIME_FORMAT = '%Y-%m-%dT%H:%M'
 
@@ -31,3 +30,12 @@ class TaskForm(forms.ModelForm):
 
 class SimpleSearchForm(forms.Form):
     search = forms.CharField(max_length=100, required=False, label="Найти")
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        widgets = {
+            'description': forms.Textarea,
+        }
+        exclude = []
