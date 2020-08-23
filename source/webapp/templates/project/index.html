@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Main{% endblock %}
+
+{% block content %}
+    <h1 id="center" class="mt-5">Список задач</h1>
+{% if is_paginated %}
+    <h3 id="center">Вы сейчас на {{ page_obj.number }} странице</h3>
+   {% include 'partial/pagination.html' %}
+{% endif %}
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+            <div class="card my-4" style="width: 18rem">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.pk }} | {{ project.name }}</h5>
+                    <p class="date">Дата начала: {{ project.start_date }}</p>
+                    <p class="date">Дата окончания: {{ project.end_date }}</p>
+{#                    <a href="{% url 'view' projects.pk%}">Подробнее</a>#}
+{#                    <a href="{% url 'delete' projects.pk%}">Удалить</a>#}
+{#                    <a href="{% url 'update' projects.pk %}">Обновить</a>#}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

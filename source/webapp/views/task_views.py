@@ -8,7 +8,7 @@ from django.views.generic import TemplateView, FormView, ListView
 from webapp.forms import TaskForm, SimpleSearchForm
 
 
-class IndexView(ListView):
+class TaskIndexView(ListView):
     template_name = 'task/index.html'
     context_object_name = 'tasks'
     model = Task
