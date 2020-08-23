@@ -3,9 +3,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.urls import reverse
 from django.utils.http import urlencode
-from webapp.models import Project
+from webapp.models import Project, Task
 from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView
-from webapp.forms import SimpleSearchForm, ProjectForm
+from webapp.forms import SimpleSearchForm, ProjectForm, TaskForm, ProjectTaskForm
 
 
 class ProjectIndexView(ListView):
@@ -54,3 +54,17 @@ class ProjectCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('project_view', kwargs={'pk': self.object.pk})
+
+
+class ProjectTaskCreateView(CreateView):
+    model = Task
+    template_name = 'project/task_in_project_create.html'
+    form_class = ProjectTaskForm
+
+    def form_valid(self, form):
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        task = form.save(commit=False)
+        task.project = project
+        task.save()
+        return redirect('project_view', pk=project.pk)
+

@@ -39,3 +39,9 @@ class ProjectForm(forms.ModelForm):
             'description': forms.Textarea,
         }
         exclude = []
+
+
+class ProjectTaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        exclude = ['project']
