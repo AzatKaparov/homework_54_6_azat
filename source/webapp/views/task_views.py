@@ -12,8 +12,8 @@ class TaskIndexView(ListView):
     template_name = 'task/index.html'
     context_object_name = 'tasks'
     model = Task
-    ordering = ['-created_at']
-    paginate_by = 10
+    ordering = ['pk']
+    paginate_by = 6
 
     def get(self, request, *args, **kwargs):
         self.form = self.get_search_form()
