@@ -16,7 +16,7 @@
                     <h5 class="card-title">{{ project.pk }} | {{ project.name }}</h5>
                     <p class="date">Дата начала: {{ project.start_date }}</p>
                     <p class="date">Дата окончания: {{ project.end_date }}</p>
-{#                    <a href="{% url 'view' projects.pk%}">Подробнее</a>#}
+                    <a href="{% url 'project_view' project.pk%}">Подробнее</a>
 {#                    <a href="{% url 'delete' projects.pk%}">Удалить</a>#}
 {#                    <a href="{% url 'update' projects.pk %}">Обновить</a>#}
                 </div>

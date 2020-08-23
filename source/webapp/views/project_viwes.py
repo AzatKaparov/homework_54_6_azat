@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.urls import reverse
 from django.utils.http import urlencode
 from webapp.models import Project
-from django.views.generic import TemplateView, FormView, ListView
+from django.views.generic import TemplateView, FormView, ListView, DetailView
 from webapp.forms import SimpleSearchForm
 
 
@@ -40,3 +40,10 @@ class ProjectIndexView(ListView):
         if self.form.is_valid():
             return self.form.cleaned_data['search']
         return None
+
+
+class ProjectView(DetailView):
+    template_name = 'project/project_view.html'
+    model = Project
+
+

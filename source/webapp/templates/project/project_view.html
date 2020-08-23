@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}View{% endblock %}
+
+
+{% block menu %}
+{#    <li class="nav-item active">#}
+{#        <a class="nav-link" href="{% url 'delete' task.pk %}">Удалить</a>#}
+{#    </li>#}
+{#    <li class="nav-item active">#}
+{#        <a class="nav-link" href="{% url 'update' task.pk %}">Обновить</a>#}
+{#    </li>#}
+{% endblock %}
+
+
+{% block content %}
+    <h5 class="mt-5">{{ project.name }}</h5>
+    {% if project.description %}
+        <p class="pre">{{ project.description }}</p>
+        <hr/>
+    {% endif %}
+    {% for i in project.tasks_project.all %}
+        <p>{{ i.pk }} | {{ i.summary }} <i class="card-status">{{ i.status }}</i> </p>
+        <p><a href="{% url 'view' i.pk %}">Подробнее</a> <a href="{% url 'delete' i.pk %}">Удалить</a>
+            <a href="{% url 'update' i.pk %}">Обновить</a></p>
+    {% endfor %}
+    <hr/>
+    <p class="date">Дата начала: {{ project.start_date }}</p>
+    <p class="date">Дата окончания: {{ project.end_date }}</p>
+{#    <p class="mt-5"></p><a class="delete-button ml-5 px-3 mb-4" href="{% url 'delete' task.pk %}">Удалить</a><br/>#}
+{#    <a class="update-button ml-5 px-3 mb-4" href="{% url 'update' task.pk %}">Обновить</a><br/>#}
+{#    <a class="back-button ml-5 px-3 mb-4" href="{% url 'index' %}">Назад</a></p>#}
+{% endblock %}
