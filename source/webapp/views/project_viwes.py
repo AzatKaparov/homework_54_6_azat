@@ -66,5 +66,6 @@ class ProjectTaskCreateView(CreateView):
         task = form.save(commit=False)
         task.project = project
         task.save()
+        form.save_m2m()
         return redirect('project_view', pk=project.pk)
 
